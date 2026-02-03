@@ -1,0 +1,200 @@
+openapi: 3.0.3
+info:
+  title: Snake Duel Local API
+  version: 0.1.0
+  description: Local-only contracts for settings and match history persistence.
+servers:
+  - url: http://localhost
+paths:
+  /api/settings:
+    get:
+      summary: Get player preferences
+      responses:
+        "200":
+          description: Current preferences
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PlayerPreferences"
+    put:
+      summary: Update player preferences
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PlayerPreferences"
+      responses:
+        "200":
+          description: Updated preferences
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PlayerPreferences"
+  /api/themes:
+    get:
+      summary: List available arena themes
+      responses:
+        "200":
+          description: Theme list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/ArenaTheme"
+  /api/match-history:
+    get:
+      summary: Get recent match history
+      parameters:
+        - in: query
+          name: limit
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 10
+            default: 10
+      responses:
+        "200":
+          description: Recent matches
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MatchRecord"
+  /api/matches:
+    post:
+      summary: Record a completed match
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/MatchRecord"
+      responses:
+        "201":
+          description: Match recorded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MatchRecord"
+  /api/high-scores:
+    get:
+      summary: Get high score list
+      responses:
+        "200":
+          description: High scores
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/HighScoreEntry"
+    post:
+      summary: Record a high score
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/HighScoreEntry"
+      responses:
+        "201":
+          description: High score recorded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HighScoreEntry"
+components:
+  schemas:
+    PlayerPreferences:
+      type: object
+      required:
+        - snakeColor
+        - difficulty
+        - themeId
+        - audioEnabled
+        - musicEnabled
+      properties:
+        snakeColor:
+          type: string
+          description: Hex color for player snake
+        difficulty:
+          type: string
+          enum: [easy, medium, hard]
+        themeId:
+          type: string
+        audioEnabled:
+          type: boolean
+        musicEnabled:
+          type: boolean
+    ArenaTheme:
+      type: object
+      required:
+        - id
+        - name
+        - backgroundStyle
+        - accentColor
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        backgroundStyle:
+          type: string
+        accentColor:
+          type: string
+    MatchRecord:
+      type: object
+      required:
+        - id
+        - timestamp
+        - winner
+        - playerSize
+        - botSize
+        - difficulty
+        - durationSec
+        - themeId
+      properties:
+        id:
+          type: string
+        timestamp:
+          type: integer
+          format: int64
+        winner:
+          type: string
+          enum: [player, bot, draw]
+        playerSize:
+          type: integer
+          minimum: 1
+        botSize:
+          type: integer
+          minimum: 1
+        difficulty:
+          type: string
+          enum: [easy, medium, hard]
+        durationSec:
+          type: integer
+          example: 30
+        themeId:
+          type: string
+    HighScoreEntry:
+      type: object
+      required:
+        - id
+        - score
+        - difficulty
+        - timestamp
+      properties:
+        id:
+          type: string
+        score:
+          type: integer
+          minimum: 0
+        difficulty:
+          type: string
+          enum: [easy, medium, hard]
+        timestamp:
+          type: integer
+          format: int64
