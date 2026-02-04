@@ -26,10 +26,14 @@ Feature Enhancements
 Edge Cases
 
 - What happens when both snakes collide in the same moment?
+
 sol-Time of collison the larger size snake win
 - What happens when a snake size would drop below the minimum due to poison?
+
 sol-clamp size to a minimum of 1 segment
 - What happens if a teleport exit is occupied by another snake segment?
+
 sol-their should be multiple entry and exit point 
 - How are overlapping power-up effects handled when collected back-to-back?
+
 sol-use a priority + stacking rule
