@@ -1,3 +1,4 @@
+import "./styles/main.css";
 import { createMatchRunner } from "./game/engine/runner";
 import { createMatchState } from "./game/engine/state";
 import { createMainMenu } from "./ui/screens/main-menu";
@@ -53,12 +54,54 @@ mainMenu.onStart(() => {
     onMatchRecord: (record) => {
       api.recordMatch(record);
     },
+    onMatchEnd: (winner) => {
+      setTimeout(() => {
+        const shouldReturn = confirm(`Game Over! Winner: ${winner}\nPress OK to return to main menu.`);
+        if (shouldReturn) {
+          runner.stop();
+          document.removeEventListener("keydown", handleKeyDown);
+          renderHome();
+        }
+      }, 1000);
+    },
   });
+
+  const handleKeyDown = (e: KeyboardEvent) => {
+    const key = e.key;
+    if (key === "ArrowUp" || key === "w" || key === "W") {
+      runner.enqueueDirection("up");
+      e.preventDefault();
+    } else if (key === "ArrowDown" || key === "s" || key === "S") {
+      runner.enqueueDirection("down");
+      e.preventDefault();
+    } else if (key === "ArrowLeft" || key === "a" || key === "A") {
+      runner.enqueueDirection("left");
+      e.preventDefault();
+    } else if (key === "ArrowRight" || key === "d" || key === "D") {
+      runner.enqueueDirection("right");
+      e.preventDefault();
+    } else if (key === "Escape") {
+      runner.stop();
+      document.removeEventListener("keydown", handleKeyDown);
+      renderHome();
+    }
+  };
+
+  document.addEventListener("keydown", handleKeyDown);
 
   root.innerHTML = "";
   root.appendChild(playScreen.root);
-  playScreen.update(matchState, theme);
-  runner.start();
+  setTimeout(() => {
+    console.log("Canvas element:", playScreen.canvas);
+    console.log("Canvas dimensions:", {
+      width: playScreen.canvas.width,
+      height: playScreen.canvas.height,
+      clientWidth: playScreen.canvas.clientWidth,
+      clientHeight: playScreen.canvas.clientHeight,
+    });
+    playScreen.update(matchState, theme);
+    runner.start();
+  }, 100);
 });
 
 mainMenu.onHistory(() => {

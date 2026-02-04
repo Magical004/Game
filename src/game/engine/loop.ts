@@ -78,12 +78,32 @@ export const createFixedLoop = <T>(options: FixedLoopOptions<T>): FixedLoop<T> =
   let lastTime = 0;
   let simTime = 0;
   let frameId = 0;
+  let inFrame = false;
+
+  const scheduleFrame = () => {
+    frameId = requestFrame((time) => {
+      if (inFrame) {
+        queueMicrotask(() => frame(time));
+        return;
+      }
+
+      inFrame = true;
+      frame(time);
+      inFrame = false;
+    });
+  };
 
   const frame: FrameRequestCallback = (time) => {
     if (!running) {
       return;
     }
-    const elapsed = Math.min(time - lastTime, maxFrameMs);
+    const delta = time - lastTime;
+    if (delta <= 0) {
+      scheduleFrame();
+      return;
+    }
+
+    const elapsed = Math.min(delta, maxFrameMs);
     lastTime = time;
     acc += elapsed;
 
@@ -98,7 +118,7 @@ export const createFixedLoop = <T>(options: FixedLoopOptions<T>): FixedLoop<T> =
       options.render(acc / stepMs, time);
     }
 
-    frameId = requestFrame(frame);
+    scheduleFrame();
   };
 
   const start = () => {
@@ -109,7 +129,7 @@ export const createFixedLoop = <T>(options: FixedLoopOptions<T>): FixedLoop<T> =
     lastTime = now();
     simTime = lastTime;
     acc = 0;
-    frameId = requestFrame(frame);
+    scheduleFrame();
   };
 
   const stop = () => {

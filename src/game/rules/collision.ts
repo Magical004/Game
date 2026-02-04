@@ -58,9 +58,9 @@ export const stepSnakes = (player: Snake, bot: Snake, bounds: Bounds): StepResul
   };
 
   const updatedPlayer = playerCollided
-    ? { ...player, status: "collided" }
+    ? { ...player, status: "collided" as const }
     : advance(player, playerNext);
-  const updatedBot = botCollided ? { ...bot, status: "collided" } : advance(bot, botNext);
+  const updatedBot = botCollided ? { ...bot, status: "collided" as const } : advance(bot, botNext);
 
   return { player: updatedPlayer, bot: updatedBot, playerCollided, botCollided };
 };

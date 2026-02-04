@@ -1,0 +1,252 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: #0b1317;
+  color: #e9f1f7;
+  overflow: hidden;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#app {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.main-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 2rem;
+}
+
+.main-menu h1 {
+  font-size: 3rem;
+  color: #5fd38d;
+  text-shadow: 0 0 20px rgba(95, 211, 141, 0.5);
+  margin-bottom: 1rem;
+}
+
+.main-menu button {
+  padding: 0.8rem 2rem;
+  font-size: 1.1rem;
+  background: linear-gradient(135deg, #5fd38d, #3db892);
+  color: #0b1317;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  min-width: 200px;
+  transition: transform 0.1s, box-shadow 0.2s;
+}
+
+.main-menu button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(95, 211, 141, 0.6);
+}
+
+.main-menu button:active {
+  transform: scale(0.98);
+}
+
+.customize-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem;
+}
+
+.customize-screen h2 {
+  font-size: 1.5rem;
+  color: #5fd38d;
+  margin-bottom: 0.5rem;
+}
+
+.customize-screen label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+}
+
+.customize-screen input[type="color"] {
+  width: 50px;
+  height: 35px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.color-preview {
+  width: 50px;
+  height: 35px;
+  border-radius: 4px;
+  border: 2px solid #3d5a6f;
+  background: #5fd38d;
+}
+
+.replayability-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem;
+  max-width: 500px;
+  width: 100%;
+}
+
+.replayability-screen h2 {
+  font-size: 1.5rem;
+  color: #5fd38d;
+  margin-bottom: 0.5rem;
+}
+
+.replayability-screen h3 {
+  font-size: 1.2rem;
+  color: #e9f1f7;
+  margin-top: 1rem;
+}
+
+.replayability-screen label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  width: 100%;
+  max-width: 300px;
+}
+
+.replayability-screen select {
+  padding: 0.5rem;
+  border-radius: 4px;
+  border: 1px solid #3d5a6f;
+  background: #162025;
+  color: #e9f1f7;
+  font-size: 1rem;
+  flex: 1;
+}
+
+.replayability-screen input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.history-list {
+  list-style: none;
+  width: 100%;
+  max-width: 400px;
+  max-height: 300px;
+  overflow-y: auto;
+  background: #162025;
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.history-list li {
+  padding: 0.5rem;
+  border-bottom: 1px solid #3d5a6f;
+  font-size: 0.9rem;
+}
+
+.history-list li:last-child {
+  border-bottom: none;
+}
+
+.replayability-screen button {
+  padding: 0.6rem 1.5rem;
+  font-size: 1rem;
+  background: #3d5a6f;
+  color: #e9f1f7;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+.replayability-screen button:hover {
+  background: #4d6a7f;
+}
+
+.play-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+  min-height: 400px;
+}
+
+.play-canvas {
+  border-radius: 8px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+  max-width: 100%;
+  max-height: calc(100vh - 80px);
+  position: relative;
+  z-index: 1;
+  min-width: 300px;
+  min-height: 300px;
+  background: #0e1a1f;
+}
+
+.hud {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+  padding: 1rem;
+  background: rgba(22, 32, 37, 0.8);
+  border-radius: 8px;
+  margin-top: 0.5rem;
+}
+
+.hud-timer {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.hud-cues {
+  font-size: 0.9rem;
+  color: #5fd38d;
+}
+
+.hud-winner {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #f7d154;
+}
+
+@media (max-width: 768px) {
+  .main-menu h1 {
+    font-size: 2rem;
+  }
+
+  .main-menu button {
+    min-width: 150px;
+    padding: 0.6rem 1.5rem;
+  }
+
+  .play-screen {
+    padding: 0.5rem;
+  }
+
+  .hud {
+    font-size: 0.9rem;
+    padding: 0.5rem;
+  }
+}

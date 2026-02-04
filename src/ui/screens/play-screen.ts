@@ -15,6 +15,8 @@ export const createPlayScreen = (): PlayScreen => {
 
   const canvas = document.createElement("canvas");
   canvas.className = "play-canvas";
+  canvas.style.width = "600px";
+  canvas.style.height = "600px";
   root.appendChild(canvas);
 
   const hud = createHud();
@@ -23,10 +25,10 @@ export const createPlayScreen = (): PlayScreen => {
   const pipeline = createRenderPipeline(canvas);
 
   const update = (state: GameState, theme?: RenderTheme) => {
-    pipeline.resize();
+    const size = pipeline.resize();
     pipeline.clear();
-    pipeline.render((ctx, size) => {
-      renderGame(ctx, size, state, theme);
+    pipeline.render((ctx: CanvasRenderingContext2D, s: any) => {
+      renderGame(ctx, s, state, theme);
     });
     hud.update({
       remainingSec: state.match.remainingSec,

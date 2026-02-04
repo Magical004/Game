@@ -102,6 +102,11 @@ export const renderGame = (
 ) => {
   const cellSize = Math.min(size.width / state.grid.width, size.height / state.grid.height);
 
+  if (cellSize <= 0) {
+    console.error("Cell size is <= 0, cannot render", { size, grid: state.grid, cellSize });
+    return;
+  }
+
   ctx.fillStyle = theme.background;
   ctx.fillRect(0, 0, size.width, size.height);
 

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Snake Duel - Instructions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #0b1317;
+            color: #e9f1f7;
+            line-height: 1.6;
+        }
+        h1 { color: #5fd38d; }
+        h2 { color: #f7d154; }
+        .url-box {
+            background: #162025;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border: 2px solid #5fd38d;
+        }
+        .improvements {
+            background: #1a2a35;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #5fd38d;
+        }
+        code {
+            background: #0e1a1f;
+            padding: 2px 8px;
+            border-radius: 4px;
+            color: #5fd38d;
+        }
+        .option {
+            background: #1a2a35;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 6px;
+            border-left: 4px solid #f7d154;
+        }
+    </style>
+</head>
+<body>
+    <h1>🐍 Snake Duel Game</h1>
+
+    <div class="url-box">
+        <strong>🎮 Game is running! Open one of these URLs in your browser:</strong>
+        <ul>
+            <li><a href="http://localhost:5174/" target="_blank" style="color: #5fd38d;">http://localhost:5174/</a> (Dev Server)</li>
+            <li><a href="http://localhost:4173/" target="_blank" style="color: #5fd38d;">http://localhost:4173/</a> (Built Version)</li>
+        </ul>
+    </div>
+
+    <div class="improvements">
+        <strong>✅ Recent Improvements</strong>
+        <ul>
+            <li><strong>Slower speed</strong> - Game now runs at 8 ticks/second (was 12)</li>
+            <li><strong>Smarter AI bot</strong> - Bot now avoids obstacles and finds paths to food</li>
+            <li><strong>No reversing</strong> - Player snake can't instantly reverse direction</li>
+            <li><strong>Better collision detection</strong> - Both snakes properly avoid walls and each other</li>
+        </ul>
+    </div>
+
+    <h2>🎯 How to Play</h2>
+    <ul>
+        <li><strong>Arrow Keys</strong> or <strong>WASD</strong> - Move your green snake</li>
+        <li><strong>Collect yellow food</strong> - Grow your snake</li>
+        <li><strong>Avoid red poison</strong> - Shrinks your snake</li>
+        <li><strong>Collect blue power-ups</strong> - Get special abilities</li>
+        <li><strong>Avoid walls and orange bot snake</strong> - Or you'll crash!</li>
+        <li><strong>Largest snake wins</strong> when timer reaches 0</li>
+        <li><strong>ESC key</strong> - Return to main menu</li>
+    </ul>
+
+    <h2>🎮 Difficulty Settings</h2>
+    <ul>
+        <li><strong>Easy</strong> - Bot reacts slowly and makes mistakes</li>
+        <li><strong>Medium</strong> - Balanced difficulty</li>
+        <li><strong>Hard</strong> - Bot is fast and accurate</li>
+    </ul>
+
+    <h2>🚀 Alternative Ways to Run</h2>
+
+    <div class="option">
+        <strong>Option 1: Use start script</strong><br>
+        <code>./start-game.sh</code>
+    </div>
+
+    <div class="option">
+        <strong>Option 2: Start manually</strong><br>
+        <code>npm run dev -- --host 0.0.0.0</code>
+    </div>
+
+    <div class="option">
+        <strong>Option 3: Run built version</strong><br>
+        <code>npm run preview -- --host 0.0.0.0</code>
+    </div>
+
+    <div class="option">
+        <strong>Option 4: Build and open dist/index.html</strong><br>
+        <code>npm run build</code><br>
+        Then open <code>dist/index.html</code> in a browser
+    </div>
+
+    <h2>🐛 Troubleshooting</h2>
+    <ul>
+        <li>If game shows but snakes don't move, press <code>F12</code> and check console for errors</li>
+        <li>If you see only a timer, canvas might not be loading - try refreshing</li>
+        <li>Make sure JavaScript is enabled in your browser</li>
+        <li>Try a different browser (Chrome, Firefox, Edge work best)</li>
+    </ul>
+</body>
+</html>
+
